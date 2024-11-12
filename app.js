@@ -1,17 +1,17 @@
 const express = require('express');
-const topicController = require('./controllers/topicController'); // Importing the topic controller
+const topicController = require('./controllers/topicController'); // Importar el controlador
 const app = express();
 
-app.set('view engine', 'ejs'); // Setting EJS as the template engine
-app.use(express.urlencoded({ extended: true })); // Middleware to parse URL-encoded bodies
+app.set('view engine', 'ejs'); // Establecemos EJS como nuestro template engine
+app.use(express.urlencoded({ extended: true })); // Middleware parser
 
-// Define routes and link them to controller functions
-app.get('/', topicController.showAll); // Show all topics and votes
-app.post('/add', topicController.addTopic); // Add a new topic
-app.post('/vote/:id', topicController.voteTopic); // Vote for a topic
-app.post('/delete/:id', topicController.deleteTopic); // Delete a topic
+// Definimos rutas y linkeamos a funciones de nuestro controlador
+app.get('/', topicController.showAll); // Muestra los topics y votos
+app.post('/add', topicController.addTopic); // Agrega topics
+app.post('/vote/:id', topicController.voteTopic); // Vota por un topic
+app.post('/delete/:id', topicController.deleteTopic); // Borra un topic
 
-// Start the server
+// Inicializamos el servidor
 app.listen(3000, () => {
   console.log('Server running at http://localhost:3000');
 });

@@ -2,7 +2,7 @@ const db = require('../db');
 
 const Topic = {
   getAll: (callback) => {
-    // Fetch topics sorted by votes in descending order
+    // Estiramos los topics en orden descedente
     db.all('SELECT * FROM topics ORDER BY votes DESC', callback);
   },
   add: (topic, callback) => {
