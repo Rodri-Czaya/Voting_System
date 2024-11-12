@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Voting System</title>
+        <script>
+          // Auto-refresh every 5 seconds
+          setInterval(() => {
+            window.location.reload();
+          }, 5000);
+        </script>
+      </head>
+<body>
+  <h1>Topics</h1>
+  <ul>
+    <% topics.forEach(topic => { %>
+      <li>
+        <%= topic.topic %> - Votes: <%= topic.votes %>
+        <form action="/vote/<%= topic.id %>" method="POST" style="display: inline;">
+          <button type="submit">Vote</button>
+        </form>
+        <form action="/delete/<%= topic.id %>" method="POST" style="display: inline;">
+          <button type="submit">Delete</button>
+        </form>
+      </li>
+    <% }) %>
+  </ul>
+  <form action="/add" method="POST">
+    <input type="text" name="topic" placeholder="New Topic" required>
+    <button type="submit">Add Topic</button>
+  </form>
+</body>
+</html>
