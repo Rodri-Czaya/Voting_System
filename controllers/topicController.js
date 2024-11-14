@@ -1,41 +1,40 @@
 const Topic = require('../models/topicModel');
 
 const topicController = {
-  showAll: (req, res) => {
-    Topic.getAll((err, topics) => {
+  showAll: function(req, res) {
+    Topic.getAll(function(err, topics) {
       if (err) {
-        console.error(err);
-        return res.sendStatus(500);
+        return res.status(500).send("Error al obtener los temas.");
       }
       res.render('index', { topics });
     });
   },
-  addTopic: (req, res) => {
+
+  addTopic: function(req, res) {
     const { topic } = req.body;
-    Topic.add(topic, (err) => {
+    Topic.add(topic, function(err) {
       if (err) {
-        console.error(err);
-        return res.sendStatus(500);
+        return res.status(500).send("Error al agregar el tema.");
       }
       res.redirect('/');
     });
   },
-  voteTopic: (req, res) => {
-    const topicId = req.params.id;
-    Topic.vote(topicId, (err) => {
+
+  voteTopic: function(req, res) {
+    const { id } = req.params;
+    Topic.vote(id, function(err) {
       if (err) {
-        console.error(err);
-        return res.sendStatus(500);
+        return res.status(500).send("Error al votar por el tema.");
       }
       res.redirect('/');
     });
   },
-  deleteTopic: (req, res) => {
-    const topicId = req.params.id;
-    Topic.delete(topicId, (err) => {
+
+  deleteTopic: function(req, res) {
+    const { id } = req.params;
+    Topic.delete(id, function(err) {
       if (err) {
-        console.error(err);
-        return res.sendStatus(500);
+        return res.status(500).send("Error al eliminar el tema.");
       }
       res.redirect('/');
     });
